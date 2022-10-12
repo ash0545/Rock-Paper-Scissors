@@ -14,7 +14,9 @@ Play a round of rock paper scissor:
         ...
 
 */
-
+// Get player's choice
+let getPlayerChoice = prompt("Enter your choice : ").toLowerCase()
+console.log(getPlayerChoice);
 //Get computer's random choice using a function
 function getComputerChoice() {
     let x = Math.floor(3 * Math.random());
