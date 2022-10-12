@@ -1,28 +1,10 @@
-/*
-Play a round of rock paper scissor:
-    Take in player's choice and computer's choice
-    If player and computer same choice:
-        Draw
-    Else:
-        If P R:
-            If C S:
-                You win
-            Else
-                You lose
-        If P S:
-            If C R:
-        ...
-
-*/
-// Get player's choice
-let getPlayerChoice = prompt("Enter your choice : ").toLowerCase()
-console.log(getPlayerChoice);
+//Create player's choice variable to be filled later
+let getPlayerChoice;
 
 //Get computer's random choice using a function
 function getComputerChoice() {
     let x = Math.floor(3 * Math.random());
     let choice = ["rock", "paper", "scissor"];
-    console.log(choice[x]);
     return choice[x];
 }
 
@@ -33,7 +15,7 @@ inputs and returning the result.
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        console.log("It's a draw!");
+        return "It's a draw!";
     } else {
         if (playerSelection === "rock") {
             if (computerSelection === "scissor") {
@@ -49,7 +31,7 @@ function playRound(playerSelection, computerSelection) {
             }
         } else if (playerSelection === "scissor") {
             if (computerSelection === "paper") {
-                return "You win, Scissor beats Paper"
+                return "You win, Scissor beats Paper";
             } else {
                 return "You lose, Rock beats Scissor";
             }
@@ -59,4 +41,42 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-console.log(playRound(getPlayerChoice, getComputerChoice()));
+/* Function to call playRound 5 times and keep score, reporting who won
+in the end.
+
+Since the return statements are structured in a particular way, we can check
+if the player won by checking whether the return statement contains the word "win"
+*/
+
+function playGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let getPlayerChoice = prompt("Enter your choice : ").toLowerCase();
+        let computerChoice = getComputerChoice();
+        console.log(getPlayerChoice);
+        console.log(computerChoice);
+        if (playRound(getPlayerChoice, computerChoice).includes("Invalid")) {
+            alert("Invalid choice");
+        } else if (playRound(getPlayerChoice, computerChoice).includes("draw")) {
+            ++playerScore;
+            ++computerScore;
+        } else if (playRound(getPlayerChoice, computerChoice).includes("win")) {
+            ++playerScore;
+        } else if (playRound(getPlayerChoice, computerChoice).includes("lose")) {
+            ++computerScore;
+        }
+        console.log(playerScore);
+        console.log(computerScore);
+    }
+    if (playerScore > computerScore) {
+        alert("You won!");
+    } else if (playerScore === computerScore) {
+        alert("It's a draw");
+    } else {
+        alert ("You lost!");
+    }
+}
+// What in the fuck is this code 
+
+playGame();
