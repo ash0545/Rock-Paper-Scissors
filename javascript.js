@@ -51,24 +51,24 @@ if the player won by checking whether the return statement contains the word "wi
 function playGame() {
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let getPlayerChoice = prompt("Enter your choice : ").toLowerCase();
-        let computerChoice = getComputerChoice();
-        console.log(getPlayerChoice);
-        console.log(computerChoice);
-        if (playRound(getPlayerChoice, computerChoice).includes("Invalid")) {
-            alert("Invalid choice");
-        } else if (playRound(getPlayerChoice, computerChoice).includes("draw")) {
-            ++playerScore;
-            ++computerScore;
-        } else if (playRound(getPlayerChoice, computerChoice).includes("win")) {
-            ++playerScore;
-        } else if (playRound(getPlayerChoice, computerChoice).includes("lose")) {
-            ++computerScore;
-        }
-        console.log(playerScore);
-        console.log(computerScore);
+    //loop from here for more rounds
+    let getPlayerChoice = prompt("Enter your choice : ").toLowerCase();
+    let computerChoice = getComputerChoice();
+    console.log(getPlayerChoice);
+    console.log(computerChoice);
+    if (playRound(getPlayerChoice, computerChoice).includes("Invalid")) {
+        alert("Invalid choice");
+    } else if (playRound(getPlayerChoice, computerChoice).includes("draw")) {
+        ++playerScore;
+        ++computerScore;
+    } else if (playRound(getPlayerChoice, computerChoice).includes("win")) {
+        ++playerScore;
+    } else if (playRound(getPlayerChoice, computerChoice).includes("lose")) {
+        ++computerScore;
     }
+    console.log(playerScore);
+    console.log(computerScore);
+    //end loop
     if (playerScore > computerScore) {
         alert("You won!");
     } else if (playerScore === computerScore) {
