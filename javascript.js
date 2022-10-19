@@ -17,7 +17,7 @@ function getComputerChoice() {
     return choices[x];
 }
 
-//function to play round of rps
+//function to play a round of rps
 function playRound(player, computer) {
     let result;
     switch(player) {
@@ -27,25 +27,31 @@ function playRound(player, computer) {
         case 'rock':
             if (computer === "scissor") {
                 result = "win";
+                ++playerScore;
                 break;
             } else {
                 result = "lose";
+                ++computerScore;
                 break;
             }
         case 'paper':
             if (computer === "rock") {
                 result = "win";
+                ++playerScore;
                 break;
             } else {
                 result = "lose";
+                ++computerScore;
                 break;
             }
         case 'scissor':
             if (computer === "paper") {
                 result = "win";
+                ++playerScore;
                 break;
             } else {
                 result = "lose";
+                ++computerScore;
                 break;
             }
         default:
@@ -56,12 +62,28 @@ function playRound(player, computer) {
 
 //create nodelist of all buttons
 const buttons = document.querySelectorAll('button');
+const displayResult = document.querySelector('.result');
 
 //for each button in nodelist, on click, play a round of rps
 buttons.forEach(button => button.addEventListener('click', () => {
     let playerChoice = button.id;
     let computerChoice = getComputerChoice();
-    console.log(playerChoice);
-    console.log(computerChoice);
-    console.log(playRound(playerChoice, computerChoice));
+    while (true) {
+        if (playerScore === 5) {
+            displayResult.textContent = 'You won! Computer Score = ' + computerScore;
+            playerScore = 0;
+            computerScore = 0;
+            break;
+        } else if (computerScore === 5) {
+            displayResult.textContent = 'You lost! Your score = ' + playerScore;
+            playerScore = 0;
+            computerScore = 0;
+            break;
+        } else {
+            let roundResult = playRound(playerChoice, computerChoice);
+            displayResult.textContent = "You " + roundResult + "! "
+            break;
+        }
+    }
 }));
+
